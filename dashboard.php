@@ -1,10 +1,12 @@
 <?php
 include 'connect.php';
-  include 'conn.php';
+include 'conn.php';
   $ob=new conn;
   //Start session
   session_start();
-
+ 
+  //Start session
+  
 ?>
 
 <!DOCTYPE>
@@ -137,16 +139,13 @@ include 'connect.php';
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          
-            <li class="active"><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> -->
-          
-        </li>
-        
+        <li class="active treeview">          
+            <li class="active"><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --> 
+        </li>        
         <li>
-          <a href="pages/Profile.php">
-            <i class="fa fa-th"></i> <span>Profile</span>
+          <a href="pages/forms/admin_profile.php">
+            <i class="fa fa-user"></i> <span>Profile</span>
           </a>
         </li>
         <li>
@@ -196,7 +195,7 @@ include 'connect.php';
               <p>New Orders</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="fa fa-cart-plus"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -241,7 +240,7 @@ include 'connect.php';
               <p>Departments</p>
             </div>
             <div class="icon">
-              <i class="fa fa-th"></i>
+              <i class="fa fa-home"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>

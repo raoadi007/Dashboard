@@ -15,16 +15,17 @@
 	//$link = mysqli_connect('localhost','root',"","db_pointofsale");	
 	
 	//Sanitize the POST values
-	$username = $_POST['username'];
+	$login = $_POST['username'];
 	$password = $_POST['password'];	
 	
 	//Create query
-	$qry  ="SELECT * FROM user WHERE username='$username' AND password='$password'";
+	$qry  ="SELECT * FROM user WHERE username='$login' AND password='$password'";
 	$result = mysqli_query($ob->connect(),$qry);
+	
 	//Check whether the query was successfull or not
 	if($result) {
 		if(mysqli_num_rows($result) > 0) {
-			//$_SESSION['administration'] = "administration";
+			//$_SESSION['admin'] = "admin";
 			
 			//Login Successful
 			session_regenerate_id();
@@ -33,7 +34,7 @@
 			$_SESSION['SESS_FIRST_NAME'] 	= $member['full_name'];
 			$_SESSION['Name']=$member['full_name'];
 			//$_SESSION['SESS_LAST_NAME'] 	= $member['position'];
-			
+			//$_SESSION['SESS_TYPE_ID'] 		= $member['User_Type_Id'];
 			//$_SESSION['SESS_PRO_PIC'] = $member['profImage'];
 			session_write_close();
 			header("location: dashboard.php");
