@@ -1,12 +1,7 @@
 <?php
 include 'connect.php';
-include 'conn.php';
-  $ob=new conn;
+include ('session.php');
   //Start session
-  session_start();
- 
-  //Start session
-  
 ?>
 
 <!DOCTYPE>
@@ -73,7 +68,7 @@ include 'conn.php';
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- User Account: style can be found in dropdown.less -->
           <?php
-          $sql_dt="SELECT * FROM `user`";
+          $sql_dt="SELECT * FROM `user` WHERE User_ID = '$session_id'";
           $run_dt=mysqli_query($ob->connect(),$sql_dt);
           $row_dt=mysqli_fetch_assoc($run_dt);
           ?>

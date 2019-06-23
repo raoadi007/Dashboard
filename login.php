@@ -1,9 +1,8 @@
 <?php
-	include 'connect.php';
-	include 'conn.php';
-	$ob=new conn;
+
+	include 'session.php';
+	
 	//Start session
-	session_start();
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -21,33 +20,33 @@
 	//Create query
 	$qry  ="SELECT * FROM user WHERE username='$login' AND password='$password'";
 	$result = mysqli_query($ob->connect(),$qry);
-	
-	//Check whether the query was successfull or not
-	if($result) {
-		if(mysqli_num_rows($result) > 0) {
-			//$_SESSION['admin'] = "admin";
+	$row = mysqli_fetch_array($result);
+		$num_row = mysqli_num_rows($result);
+		$pass=$row['password'];
+		$status =$row['status'];
+		
+		if( $num_row > 0 ) { 
+		
+
+		$_SESSION['id']=$row['User_ID'];
+		
+		
+		if($status=='Administrator'){
 			
-			//Login Successful
-			session_regenerate_id();
-			$member = mysqli_fetch_assoc($result);
-			$_SESSION['SESS_MEMBER_ID'] 	= $member['User_ID'];
-			$_SESSION['SESS_FIRST_NAME'] 	= $member['full_name'];
-			$_SESSION['Name']=$member['full_name'];
-			//$_SESSION['SESS_LAST_NAME'] 	= $member['position'];
-			//$_SESSION['SESS_TYPE_ID'] 		= $member['User_Type_Id'];
-			//$_SESSION['SESS_PRO_PIC'] = $member['profImage'];
-			session_write_close();
-			header("location: dashboard.php");
-			exit();
-		}else {
-			//Login failed
-                echo "<script type='text/javascript'> 
+			echo "<script type='text/javascript'> 
+                		window.location='dashboard.php'; 
+                		</script>";
+	
+	}elseif{
+		echo "<script type='text/javascript'> 
+                		window.location='dashboard1.php'; 
+                		</script>";
+	}else{
+
+		echo "<script type='text/javascript'> 
                 		alert('Wrong Input Details');
                 		window.location='index.php'; 
                 		</script>";
-                //header('location:index.php');			
-		}
-	}else {
-		die("Query failed");
+	}
 	}
 ?>
