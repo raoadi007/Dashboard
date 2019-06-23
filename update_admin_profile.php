@@ -1,25 +1,10 @@
 <?php
 
 include '../../session.php';
+
+$id=$_GET['id'];
   //Start session
-  
-// new data
-/*$name 		= $_POST['full_name'];
-$username 	= $_POST['username'];
-$password 	= $_POST['password'];
-$status 	= $_POST['status'];
-
-// query
-$sql = "UPDATE user
-        SET full_name = '$name', username = '$username', password = '$password', status = '$status'
-    WHERE User_ID = '$id'";
-
-$query = mysqli_query($ob->connect(),$sql);
-
-header("location: admin_profile.php");*/
-
 ?>
-
 <!DOCTYPE>
 <html>
 <head>
@@ -197,81 +182,48 @@ header("location: admin_profile.php");*/
             <!-- /.box-header -->
             <!-- form start -->
             <?php
-          $sql_dt="SELECT * FROM `user` WHERE User_ID = '$session_id'";
+          $sql_dt="SELECT * FROM `user` WHERE User_ID = '$id'";
           $run_dt=mysqli_query($ob->connect(),$sql_dt);
-          $row_dt=mysqli_fetch_assoc($run_dt);
-          $id  = $row_dt['User_ID'];
+          while($row_dt=mysqli_fetch_assoc($run_dt))
+              {
+
           ?>
-            <form role="form">
+            <form method="post" action="save_update_admin_profile.php">
               <div class="box-body" align="center">
-              	<img class="profile-user-img img-responsive img-circle" src="../../dist/img/user2-160x160.jpg" alt="User profile picture">
-              	<hr>
                 <div class="form-group">
+                	<input type="hidden" name="id" value="<?php echo $id; ?>">
                   <label for="exampleInputEmail1">Name</label>
-                  <input type="text" value="<?php echo $row_dt['full_name']; ?>" class="form-control" style="width: 250px;" id="exampleInputEmail1" placeholder="Name">
+                  <input type="text" name="full_name" value="<?php echo $row_dt['full_name']; ?>" class="form-control" style="width: 250px;" id="exampleInputEmail1" placeholder="Name">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Username</label>
-                  <input type="text" value="<?php echo $row_dt['username']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
+                  <input type="text" name="username" value="<?php echo $row_dt['username']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" value="<?php echo $row_dt['password']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Password">
+                  <input type="text" name="password" value="<?php echo $row_dt['password']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Status</label>
-                  <input type="text" value="<?php echo $row_dt['status']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
+                  <input type="text" name="status" value="<?php echo $row_dt['status']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
                 </div>
+                <?php
+          }
+            ?>
                 <br>
-                <a href="update_admin_profile.php?id=<?php echo $row['User_ID']; ?>"><button type="button" class="btn btn-primary">Update</button></a>
+                <button class="btn btn-primary" name="update">Update</button>
               </div>
               <!-- /.box-body -->
 
             </form>
+            <?php 
 
+            
+
+            ?>
           </div>
           <!-- /.box -->
-          <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Edit Profile</h4>
-              </div>
-              <div class="modal-body">
-                <form role="form" method="post" action="update_admin_profile.php">
-              <div class="box-body" align="center">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Name</label>
-                  <input type="text" value="<?php echo $row_dt['full_name']; ?>" class="form-control" style="width: 250px;" id="exampleInputEmail1" placeholder="Name">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Username</label>
-                  <input type="text" value="<?php echo $row_dt['username']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="text" value="<?php echo $row_dt['password']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Status</label>
-                  <input type="text" value="<?php echo $row_dt['status']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
-                </div>
-                <br>
-                <button type="submit" name="save" class="btn btn-primary">Save changes</button>
-               </div>
-           </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
+         
           <!-- Form Element sizes -->
           
           <!-- /.box -->
