@@ -135,17 +135,17 @@ $id=$_GET['id'];
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-th"></i> <span>Departments</span>
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-th"></i> <span>View Data</span>
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-pie-chart"></i> <span>View Data By Charts</span>
           </a>
         </li>
@@ -159,14 +159,9 @@ $id=$_GET['id'];
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        General Form Elements
-        <small>Preview</small>
+        Admin Panel
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+
     </section>
 
     <!-- Main content -->
@@ -177,7 +172,7 @@ $id=$_GET['id'];
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Edit Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

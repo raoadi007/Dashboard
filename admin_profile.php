@@ -150,17 +150,17 @@ header("location: admin_profile.php");*/
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-th"></i> <span>Departments</span>
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-th"></i> <span>View Data</span>
           </a>
         </li>
         <li>
-          <a href="pages/Profile.php">
+          <a href="../../pages/Profile.php">
             <i class="fa fa-pie-chart"></i> <span>View Data By Charts</span>
           </a>
         </li>

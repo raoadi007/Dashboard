@@ -2,14 +2,15 @@
 
 include '../../session.php';
 
+$id=$_GET['id'];
+  //Start session
 ?>
-
 <!DOCTYPE>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Customer Department Form</title>
+  <title>Dashboard | Purchase Department Profile</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -18,7 +19,6 @@ include '../../session.php';
   <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -40,11 +40,11 @@ include '../../session.php';
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b></b>Customer Department</span>
+      <span class="logo-lg"><b></b>Purchase Department</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -126,21 +126,21 @@ include '../../session.php';
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li >          
-            <li ><a href="../../dashboard2.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li ><a href="../../dashboard1.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
           <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --> 
         </li>        
-        <li>
-          <a href="../../pages/forms/customer_dep_profile.php">
+        <li class="active">
+          <a href="../../pages/forms/purchase_dep_profile.php">
             <i class="fa fa-user"></i> <span>Profile</span>
           </a>
         </li>
-        <li class="active">
-          <a href="../../pages/forms/form_customer_dep.php">
+        <li>
+          <a href="../../pages/forms/form_purchase_dep.php">
             <i class="fa fa-cloud-upload"></i> <span>Import Files</span>
           </a>
         </li>
         <li>
-          <a href="../../pages/forms/view_customer_dep.php">
+          <a href="../../pages/forms/view_purchase_dep.php">
             <i class="fa fa-database"></i> <span>View Data</span>
           </a>
         </li>
@@ -159,8 +159,8 @@ include '../../session.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Customer Department Form 
-        <small></small>
+        Purchase Department
+        
       </h1>
       
     </section>
@@ -169,106 +169,77 @@ include '../../session.php';
     <section class="content">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-12">
+        <div class="col-md-11">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Customer File Upload Here</h3>
+              <h3 class="box-title">Edit Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" action="../../pages/import/import_customer.php" name="upload_excel" enctype="multipart/form-data">
-              
-                <div class="form-group" style="margin-left: 400px; padding-bottom: 20px;">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" name="file" id="file">
+            <?php
+          $sql_dt="SELECT * FROM `user` WHERE User_ID = '$id'";
+          $run_dt=mysqli_query($ob->connect(),$sql_dt);
+          while($row_dt=mysqli_fetch_assoc($run_dt))
+              {
+
+          ?>
+            <form method="post" action="save_update_pur_dep_profile.php">
+              <div class="box-body" align="center">
+                <div class="form-group">
+                	<input type="hidden" name="id" value="<?php echo $id; ?>">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="text" name="full_name" value="<?php echo $row_dt['full_name']; ?>" class="form-control" style="width: 250px;" id="exampleInputEmail1" placeholder="Name">
                 </div>
-                <div>
-              
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Username</label>
+                  <input type="text" name="username" value="<?php echo $row_dt['username']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="text" name="password" value="<?php echo $row_dt['password']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Status</label>
+                  <input type="text" name="status" value="<?php echo $row_dt['status']; ?>" class="form-control" style="width: 250px;" id="exampleInputPassword1" placeholder="Username">
+                </div>
+                <?php
+          }
+            ?>
+                <br>
+                <button class="btn btn-primary" name="update">Update</button>
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" id="submit" name="Import" class="btn btn-primary" style="margin-left: 400px;">Import</button>
-              </div>
             </form>
-          </div>
-              </form>           
-    </section>
-    <!-- Main content -->
+            <?php 
 
+            
 
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Customer Department Data Table</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Customer Name</th>
-                  <th>Item Name</th>
-                  <th>Width</th>
-                  <th>Height</th>
-                  <th>Color</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                  <th>Contact</th>
-                  <th>Purchase ID</th>
-                </tr>
-                </thead>
-                <?php
-                $sql_order="SELECT * FROM stg_order";
-                $run=mysqli_query($ob->connect(),$sql_order);
-                while($row=mysqli_fetch_array($run))
-                {
-                ?>
-                <tbody>
-                <tr>
-                  <td><?php echo $row['stg_Order_ID']; ?></td>
-                  <td><?php echo $row['stg_Customer_Name']; ?></td>
-                  <td><?php echo $row['stg_Item_Name']; ?></td>
-                  <td><?php echo $row['stg_Width']; ?></td>
-                  <td><?php echo $row['stg_Height']; ?></td>
-                  <td><?php echo $row['stg_Color']; ?></td>
-                  <td><?php echo $row['stg_Quantity']; ?></td>
-                  <td><?php echo $row['stg_Price']; ?></td>
-                  <td><?php echo $row['stg_Customer_Contact']; ?></td>
-                  <td><?php echo $row['stg_Purchase_ID']; ?></td>
-                </tr>                
-                </tbody>
-                <?php 
-              }
-                ?>
-              </table>
-            </div>
-            <!-- /.box-body -->
+            ?>
           </div>
-          <form method="post" action="../../pages/forms/save_load_customer_dep.php">
-          <div class="box-footer">
-                <button type="submit" name="save" class="btn btn-success" style="margin-left: 420px;">Load</button>
-              </div>
-              </form>
           <!-- /.box -->
+         
+          <!-- Form Element sizes -->
+          
+          <!-- /.box -->
+
+          <!-- /.box -->
+
+          <!-- Input addon -->
+          
+          <!-- /.box -->
+
         </div>
-        <!-- /.col -->
+        <!--/.col (left) -->
+        <!-- right column -->
+        <!--/.col (right) -->
       </div>
       <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
-    
-  </div>
   <!-- /.content-wrapper -->
-
-  
-
-
-
-
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
@@ -477,26 +448,11 @@ include '../../session.php';
 <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
 </body>
 </html>
